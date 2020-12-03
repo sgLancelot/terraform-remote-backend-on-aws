@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "tf_backend_bucket" {
-  bucket = "your_bucket_name" # var this
+  bucket = "your-bucket-name-zk-testing" # var this
   acl    = "private"          # this is assumes that your pipeline is in the same AWS account. Dont var this.
   
   versioning {
@@ -16,6 +16,23 @@ resource "aws_s3_bucket" "tf_backend_bucket" {
 
   tags = {
     Name          = "S3 Bucket for Terraform Backend"
+    ProvisionedBy = "Terraform"
+    # you can add more tags here, such as Environment
+  }
+}
+
+resource "aws_dynamodb_table" "tf_state_lock_db" {
+  name = "your_ddb_name" # var this
+  billing_mode = "PAY_PER_REQUEST" # state lock DB is very seldom utilized. reduce cost with this.
+  hash_key = "LockID"
+
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+
+  tags = {
+    Name          = "DynamoDB for Terraform State Locking"
     ProvisionedBy = "Terraform"
     # you can add more tags here, such as Environment
   }
