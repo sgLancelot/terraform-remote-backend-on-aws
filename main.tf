@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "tf_backend_bucket" {
-  bucket = "your-bucket-name-zk-testing" # var this
-  acl    = "private"          # this is assumes that your pipeline is in the same AWS account. Dont var this.
-  
+  bucket = var.bucket_name
+  acl    = "private" # this is assumes that your pipeline is in the same AWS account.
+
   versioning {
     enabled = true # hashicorp highly recommends enabling Bucket Versioning to allow for state recovery in case of accidental deletions
   }
@@ -15,16 +15,26 @@ resource "aws_s3_bucket" "tf_backend_bucket" {
   }
 
   tags = {
-    Name          = "S3 Bucket for Terraform Backend"
+    Name          = var.bucket_name
     ProvisionedBy = "Terraform"
     # you can add more tags here, such as Environment
   }
 }
 
+resource "aws_s3_bucket_public_access_block" "block_public_bucket" {
+  # blocks bucket public access. should be modified to fit the system design.
+  bucket = aws_s3_bucket.tf_backend_bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
 resource "aws_dynamodb_table" "tf_state_lock_db" {
-  name = "your_ddb_name" # var this
+  name         = var.dynamodb_name
   billing_mode = "PAY_PER_REQUEST" # state lock DB is very seldom utilized. reduce cost with this.
-  hash_key = "LockID"
+  hash_key     = "LockID"
 
   attribute {
     name = "LockID"
@@ -32,7 +42,7 @@ resource "aws_dynamodb_table" "tf_state_lock_db" {
   }
 
   tags = {
-    Name          = "DynamoDB for Terraform State Locking"
+    Name          = var.dynamodb_name
     ProvisionedBy = "Terraform"
     # you can add more tags here, such as Environment
   }

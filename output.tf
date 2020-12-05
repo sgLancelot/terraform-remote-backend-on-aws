@@ -1,41 +1,14 @@
-# output the bucket name
-# a recommended key location
-# region bucket is in
-# dynamodb_table
-/*
-Need to allow S3 access:
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": "s3:ListBucket",
-      "Resource": "arn:aws:s3:::mybucket"
-    },
-    {
-      "Effect": "Allow",
-      "Action": ["s3:GetObject", "s3:PutObject"],
-      "Resource": "arn:aws:s3:::mybucket/path/to/my/key"
-    }
-  ]
+output "bucket_name" {
+  value       = aws_s3_bucket.tf_backend_bucket.id
+  description = "Bucket name of your remote Terraform state storage"
 }
 
-
-
-Need to allow DDB Table permissions
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "dynamodb:GetItem",
-        "dynamodb:PutItem",
-        "dynamodb:DeleteItem"
-      ],
-      "Resource": "arn:aws:dynamodb:*:*:table/mytable"
-    }
-  ]
+output "dynamodb_name" {
+  value       = aws_dynamodb_table.tf_state_lock_db.id
+  description = "DynamoDB table name of your remote Terraform state locking mechanism"
 }
 
-*/
+output "region" {
+  value       = var.region
+  description = "Region your remote Terraform state will be in"
+}

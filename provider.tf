@@ -9,7 +9,5 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-southeast-1" # convert to var
-  #access_key = "xxxxx" # Remember to not hardcode your credentials
-  #secret_key = "xxxxx" # Remember to not hardcode your credentials
+  region = var.region
 }
