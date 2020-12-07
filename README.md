@@ -17,9 +17,6 @@ Features
 - Terraform state storage on Amazon S3 Bucket
 - State locking with AWS DynamoDB Table
 
-
-Remote backends stores your Terraform state remotely, in this case, in an AWS S3 Bucket.
-
 Prerequisites
 -------------
 Terraform must be installed before usage of this Terraform script. For more instructions on how to do so, refer to https://learn.hashicorp.com/tutorials/terraform/install-cli. Ensure that you are using Terraform version 0.13.5 at least. 
