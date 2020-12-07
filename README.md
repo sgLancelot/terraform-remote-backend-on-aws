@@ -1,7 +1,7 @@
 Terraform Remote Backend on AWS
 ========
 
-![alt text](https://www.terraform.io/assets/images/logo-hashicorp-3f10732f.svg "terraform")
+![alt text](https://www.terraform.io/assets/images/og-image-8b3e4f7d.png "terraform")
 
 This Terraform script will help you to create a remote backend to store your Terraform state for your Terraform projects. 
 
