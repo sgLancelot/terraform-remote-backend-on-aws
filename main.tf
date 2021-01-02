@@ -47,3 +47,9 @@ resource "aws_dynamodb_table" "tf_state_lock_db" {
     # you can add more tags here, such as Environment
   }
 }
+
+resource "github_repository" "testing" {
+  name        = var.github_repo_name
+  description = "This is a description of GitHub Terraform Code repository"
+  private     = true
+}

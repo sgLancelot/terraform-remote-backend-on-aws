@@ -10,8 +10,19 @@ variable "dynamodb_name" {
   default     = "tfstate-locking-dynamodb-table"
 }
 
+variable "github_repo_name" {
+  description = "GitHub repository name for Terraform code"
+  type        = string
+  default     = "terraform-code-repo"
+}
+
 variable "region" {
   description = "Region to deploy the remote backend"
   type        = string
   default     = "us-east-1"
+}
+
+variable "github_access_token" {
+  description = "GitHub Personal Access Token to access GitHub API"
+  type        = string
 }
