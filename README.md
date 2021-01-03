@@ -4,7 +4,6 @@ This Terraform script will help you to create a remote backend to store your Ter
 
 To use this Terraform script, go to the root directory and run:
 
-    terraform init
     terraform apply
     
 Terraform state can be stored locally or remote. Since this Terraform script helps you to create a backend to store your Terraform state remotely, it should use a local state to do so.
@@ -17,7 +16,7 @@ Features
 
 Prerequisites
 -------------
-Terraform must be installed before usage of this Terraform script. For more instructions on how to do so, refer to https://learn.hashicorp.com/tutorials/terraform/install-cli. Ensure that you are using Terraform version 0.13.5 at least. 
+Terraform must be installed before usage of this Terraform script. For more instructions on how to do so, refer to https://learn.hashicorp.com/tutorials/terraform/install-cli. Ensure that you are using Terraform version 0.14.3 at least. 
 
 Terraform utilizes your local AWS credentials stored on your computer to interact with AWS via the AWS provider. You need to install AWS CLI on your local computer and run `aws configure` to configure your local AWS credentials before running `terraform init` and `terraform apply`. Ensure that your AWS credentials have permissions to create AWS S3 buckets and DynamoDB tables.
 
@@ -38,13 +37,13 @@ To utilise the additional feature to create an empty GitHub repository, run the 
     git clone https://github.com/sgLancelot/terraform-remote-backend-on-aws.git
     cd terraform-remote-backend-on-aws
     git checkout origin/github-as-code-repo
-    terraform init
 
 Log into your GitHub account and generate a GitHub personal access token. This token key needs to be added into your Terraform variable file (terraform.tfvars). REMEMBER to treat your access Token like your password and NEVER expose it by checking it into a public version control repository. 
 
     touch terraform.tfvars
+    terraform init
 
-Modify terraform.tfvars and add in: github_access_token = "<YOUR_GITHUB_ACCESS_TOKEN>". The detailed instructions can be found here: https://blog.zhenkai.xyz/getting-started-with-terraform-ci-cd-github-repository/
+Open terraform.tfvars with a text editor and add in: `github_access_token = "<YOUR_GITHUB_ACCESS_TOKEN>"`. The detailed instructions can be found in my blogpost: https://blog.zhenkai.xyz/getting-started-with-terraform-ci-cd-github-repository/
 
 Support
 -------
